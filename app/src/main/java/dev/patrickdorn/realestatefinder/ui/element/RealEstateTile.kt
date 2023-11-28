@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import dev.patrickdorn.realestatefinder.R
+import dev.patrickdorn.realestatefinder.ui.theme.RealEstateFinderTheme
 
 @Composable
 fun RealEstateTile(
@@ -32,12 +33,13 @@ fun RealEstateTile(
     title: String,
     address: String,
     url: String,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Box(
             modifier = modifier,
-            contentAlignment = Alignment.BottomStart
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -54,7 +56,13 @@ fun RealEstateTile(
             )
             PriceLabel(
                 price = price,
+                modifier = modifier.align(Alignment.BottomStart)
+            )
+            FavoriteIcon(
+                isMarked = isFavorite,
+                onClick = onFavoriteClick,
                 modifier = modifier
+                    .align(Alignment.BottomEnd)
             )
         }
         Text(
@@ -91,11 +99,15 @@ fun RealEstateTile(
 @Preview(showBackground = true)
 @Composable
 fun RealEstateTilePreview() {
-    RealEstateTile(
-        "330000 EUR",
-        "Erstbezug in TOP Lage",
-        "Habiskusstraße 23, 73892 Oberfeld",
-        "",
-        Modifier
-    )
+    RealEstateFinderTheme {
+        RealEstateTile(
+            "330000 EUR",
+            "Erstbezug in TOP Lage",
+            "Habiskusstraße 23, 73892 Oberfeld",
+            "",
+            false,
+            {},
+            Modifier
+        )
+    }
 }

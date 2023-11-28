@@ -5,5 +5,6 @@ data class RealEstateListItem(
     val price: String,
     val title: String,
     val address: String,
-    val url: String
+    val url: String,
+    val isFavorite: Boolean
 )

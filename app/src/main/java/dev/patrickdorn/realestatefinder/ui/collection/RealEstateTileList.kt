@@ -11,14 +11,24 @@ import dev.patrickdorn.realestatefinder.ui.element.RealEstateTile
 import dev.patrickdorn.realestatefinder.ui.theme.RealEstateFinderTheme
 
 @Composable
-fun RealEstateTileList(realEstateListItems: List<RealEstateListItem>?, modifier: Modifier) {
+fun RealEstateTileList(
+    realEstateListItems: List<RealEstateListItem>?,
+    modifier: Modifier = Modifier,
+    onFavoriteClick: (String) -> Unit = {}
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
     ) {
-        realEstateListItems?.forEach {
+        realEstateListItems?.forEach { data ->
             item {
-                RealEstateTile(it.price, it.title, it.address, it.url)
+                RealEstateTile(
+                    data.price,
+                    data.title,
+                    data.address,
+                    data.url,
+                    data.isFavorite,
+                    { onFavoriteClick.invoke(data.id) })
             }
         }
     }
@@ -34,8 +44,9 @@ fun RealEstateTileListPreview() {
                 it.toString() + "€",
                 "Item # $it",
                 "House with Number: $it",
-                ""
+                "",
+                true
             )
-        }, Modifier)
+        })
     }
 }

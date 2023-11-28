@@ -29,7 +29,10 @@ fun RealEstateListScreen(
         modifier = modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        RealEstateTileList(items.value, modifier = modifier)
+        RealEstateTileList(
+            items.value,
+            modifier = modifier
+        ) { id -> realEstateListViewModel.toggleFavorite(id) }
     }
 }
 

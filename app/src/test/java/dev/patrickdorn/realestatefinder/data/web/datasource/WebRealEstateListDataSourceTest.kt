@@ -10,7 +10,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import kotlin.test.assertEquals
 
-@Suppress("INLINE_FROM_HIGHER_PLATFORM")
 class WebRealEstateListDataSourceTest {
 
     private val mockDataList = buildRealEstatePropertyList(
